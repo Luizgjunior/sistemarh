@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - RH Pro</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-nav">
+            <div class="dashboard-logo">
+                <i class="fas fa-users"></i>
+                <span>RH Pro - Admin</span>
+            </div>
+            <div class="dashboard-menu">
+                <a href="dashboard-admin.html" class="active">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="gerenciar-empresas.html">
+                    <i class="fas fa-building"></i> Empresas
+                </a>
+                <a href="gerenciar-candidatos.html">
+                    <i class="fas fa-user-tie"></i> Candidatos
+                </a>
+                <a href="gerenciar-vagas.html">
+                    <i class="fas fa-briefcase"></i> Vagas
+                </a>
+                <a href="relatorios-admin.html">
+                    <i class="fas fa-chart-bar"></i> Relatórios
+                </a>
+                <a href="configuracoes-admin.html">
+                    <i class="fas fa-cog"></i> Configurações
+                </a>
+                <div class="user-menu">
+                    <div class="user-avatar" onclick="toggleUserMenu()">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="perfil-admin.html">
+                            <i class="fas fa-user"></i> Perfil
+                        </a>
+                        <a href="configuracoes-admin.html">
+                            <i class="fas fa-cog"></i> Configurações
+                        </a>
+                        <a href="#" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard">
+        <div class="dashboard-content">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h1>Painel Administrativo</h1>
+                <p>Gerencie todo o sistema de RH</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Total de Usuários</h3>
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number" id="totalUsers">0</div>
+                    <div class="stat-label">Empresas + Candidatos</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> +25 este mês
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Empresas Ativas</h3>
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="stat-number" id="activeCompanies">0</div>
+                    <div class="stat-label">Empresas cadastradas</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> +5 esta semana
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Vagas Ativas</h3>
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="stat-number" id="activeJobs">0</div>
+                    <div class="stat-label">Vagas publicadas</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> +12 esta semana
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Candidaturas</h3>
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-number" id="totalApplications">0</div>
+                    <div class="stat-label">Total de candidaturas</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> +48 esta semana
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Overview -->
+            <div class="system-overview">
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <h3>Atividade do Sistema</h3>
+                        <div class="activity-stats">
+                            <div class="activity-item">
+                                <span class="activity-label">Usuários Online</span>
+                                <span class="activity-value">127</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-label">Páginas Visualizadas</span>
+                                <span class="activity-value">2.4K</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-label">Tempo Médio de Sessão</span>
+                                <span class="activity-value">8m 32s</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <h3>Status do Sistema</h3>
+                        <div class="system-status">
+                            <div class="status-item">
+                                <i class="fas fa-server status-ok"></i>
+                                <span>Servidor Principal</span>
+                                <span class="status-text ok">Online</span>
+                            </div>
+                            <div class="status-item">
+                                <i class="fas fa-database status-ok"></i>
+                                <span>Banco de Dados</span>
+                                <span class="status-text ok">Online</span>
+                            </div>
+                            <div class="status-item">
+                                <i class="fas fa-envelope status-ok"></i>
+                                <span>Serviço de E-mail</span>
+                                <span class="status-text ok">Online</span>
+                            </div>
+                            <div class="status-item">
+                                <i class="fas fa-cloud status-warning"></i>
+                                <span>CDN</span>
+                                <span class="status-text warning">Lento</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="recent-activity">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>Atividade Recente</h3>
+                        <a href="logs-admin.html" class="btn btn-secondary btn-sm">Ver Logs</a>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Usuário</th>
+                                <th>Ação</th>
+                                <th>Detalhes</th>
+                                <th>IP</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="user-info">
+                                        <div class="user-avatar">JD</div>
+                                        <div>
+                                            <div class="user-name">João Silva</div>
+                                            <div class="user-type">Candidato</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Login</td>
+                                <td>Login realizado com sucesso</td>
+                                <td>192.168.1.100</td>
+                                <td>Hoje, 14:30</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-info">
+                                        <div class="user-avatar">TC</div>
+                                        <div>
+                                            <div class="user-name">TechCorp</div>
+                                            <div class="user-type">Empresa</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Nova Vaga</td>
+                                <td>Vaga "Desenvolvedor Frontend" criada</td>
+                                <td>192.168.1.101</td>
+                                <td>Hoje, 13:45</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-info">
+                                        <div class="user-avatar">MS</div>
+                                        <div>
+                                            <div class="user-name">Maria Santos</div>
+                                            <div class="user-type">Candidato</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Candidatura</td>
+                                <td>Candidatou-se para "Designer UX/UI"</td>
+                                <td>192.168.1.102</td>
+                                <td>Hoje, 12:20</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-info">
+                                        <div class="user-avatar">DS</div>
+                                        <div>
+                                            <div class="user-name">DesignStudio</div>
+                                            <div class="user-type">Empresa</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Atualização</td>
+                                <td>Perfil da empresa atualizado</td>
+                                <td>192.168.1.103</td>
+                                <td>Ontem, 16:30</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2>Ações Administrativas</h2>
+                <div class="actions-grid">
+                    <a href="gerenciar-empresas.html" class="action-card">
+                        <i class="fas fa-building"></i>
+                        <h3>Gerenciar Empresas</h3>
+                        <p>Visualize e gerencie empresas</p>
+                    </a>
+                    <a href="gerenciar-candidatos.html" class="action-card">
+                        <i class="fas fa-user-tie"></i>
+                        <h3>Gerenciar Candidatos</h3>
+                        <p>Visualize e gerencie candidatos</p>
+                    </a>
+                    <a href="gerenciar-vagas.html" class="action-card">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>Gerenciar Vagas</h3>
+                        <p>Modere e gerencie vagas</p>
+                    </a>
+                    <a href="relatorios-admin.html" class="action-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Relatórios</h3>
+                        <p>Analise métricas do sistema</p>
+                    </a>
+                    <a href="backup-admin.html" class="action-card">
+                        <i class="fas fa-database"></i>
+                        <h3>Backup</h3>
+                        <p>Gerencie backups do sistema</p>
+                    </a>
+                    <a href="configuracoes-admin.html" class="action-card">
+                        <i class="fas fa-cog"></i>
+                        <h3>Configurações</h3>
+                        <p>Configure o sistema</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- System Alerts -->
+            <div class="system-alerts">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>Alertas do Sistema</h3>
+                        <button class="btn btn-secondary btn-sm" onclick="markAllAsRead()">Marcar Todos como Lidos</button>
+                    </div>
+                    <div class="alerts-list">
+                        <div class="alert-item warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div class="alert-content">
+                                <div class="alert-title">CDN com Latência Alta</div>
+                                <div class="alert-description">O CDN está apresentando latência 30% acima do normal</div>
+                                <div class="alert-time">Há 2 horas</div>
+                            </div>
+                            <button class="btn btn-sm btn-secondary">Resolver</button>
+                        </div>
+                        <div class="alert-item info">
+                            <i class="fas fa-info-circle"></i>
+                            <div class="alert-content">
+                                <div class="alert-title">Backup Automático Concluído</div>
+                                <div class="alert-description">Backup diário realizado com sucesso</div>
+                                <div class="alert-time">Hoje, 03:00</div>
+                            </div>
+                            <button class="btn btn-sm btn-secondary">Ver Detalhes</button>
+                        </div>
+                        <div class="alert-item success">
+                            <i class="fas fa-check-circle"></i>
+                            <div class="alert-content">
+                                <div class="alert-title">Atualização de Segurança</div>
+                                <div class="alert-description">Sistema atualizado com as últimas correções de segurança</div>
+                                <div class="alert-time">Ontem, 18:30</div>
+                            </div>
+                            <button class="btn btn-sm btn-secondary">Ver Detalhes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>

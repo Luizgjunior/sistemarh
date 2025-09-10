@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Vaga - RH Pro</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-nav">
+            <div class="dashboard-logo">
+                <i class="fas fa-users"></i>
+                <span>RH Pro - Empresa</span>
+            </div>
+            <div class="dashboard-menu">
+                <a href="dashboard-empresa.html">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="vagas-empresa.html">
+                    <i class="fas fa-briefcase"></i> Vagas
+                </a>
+                <a href="candidatos-empresa.html">
+                    <i class="fas fa-user-tie"></i> Candidatos
+                </a>
+                <a href="criar-vaga.html" class="active">
+                    <i class="fas fa-plus"></i> Nova Vaga
+                </a>
+                <a href="configuracoes-empresa.html">
+                    <i class="fas fa-cog"></i> Configurações
+                </a>
+                <div class="user-menu">
+                    <div class="user-avatar" onclick="toggleUserMenu()">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="perfil-empresa.html">
+                            <i class="fas fa-user"></i> Perfil
+                        </a>
+                        <a href="configuracoes-empresa.html">
+                            <i class="fas fa-cog"></i> Configurações
+                        </a>
+                        <a href="#" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard">
+        <div class="dashboard-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>Criar Nova Vaga</h1>
+                    <p>Preencha os dados da vaga para publicá-la</p>
+                </div>
+                <div class="page-actions">
+                    <a href="vagas-empresa.html" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </a>
+                </div>
+            </div>
+
+            <!-- Job Form -->
+            <form id="jobForm" class="form-container">
+                <!-- Basic Information -->
+                <div class="form-section">
+                    <h3>Informações Básicas</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jobTitle">Título da Vaga *</label>
+                            <input type="text" id="jobTitle" name="title" required placeholder="Ex: Desenvolvedor Frontend">
+                        </div>
+                        <div class="form-group">
+                            <label for="jobCategory">Categoria *</label>
+                            <select id="jobCategory" name="category" required>
+                                <option value="">Selecione uma categoria</option>
+                                <option value="tecnologia">Tecnologia</option>
+                                <option value="design">Design</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="vendas">Vendas</option>
+                                <option value="rh">Recursos Humanos</option>
+                                <option value="financeiro">Financeiro</option>
+                                <option value="operacoes">Operações</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jobDescription">Descrição da Vaga *</label>
+                        <textarea id="jobDescription" name="description" required placeholder="Descreva as responsabilidades e atividades da vaga..."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jobRequirements">Requisitos *</label>
+                            <textarea id="jobRequirements" name="requirements" required placeholder="Liste os requisitos necessários..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="jobBenefits">Benefícios</label>
+                            <textarea id="jobBenefits" name="benefits" placeholder="Liste os benefícios oferecidos..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location and Type -->
+                <div class="form-section">
+                    <h3>Localização e Tipo</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jobLocation">Localização *</label>
+                            <input type="text" id="jobLocation" name="location" required placeholder="Ex: São Paulo, SP">
+                        </div>
+                        <div class="form-group">
+                            <label for="jobWorkMode">Modalidade de Trabalho *</label>
+                            <select id="jobWorkMode" name="workMode" required>
+                                <option value="">Selecione a modalidade</option>
+                                <option value="presencial">Presencial</option>
+                                <option value="remoto">Remoto</option>
+                                <option value="hibrido">Híbrido</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jobContractType">Tipo de Contrato *</label>
+                            <select id="jobContractType" name="contractType" required>
+                                <option value="">Selecione o tipo</option>
+                                <option value="clt">CLT</option>
+                                <option value="pj">PJ</option>
+                                <option value="estagio">Estágio</option>
+                                <option value="freelancer">Freelancer</option>
+                                <option value="temporario">Temporário</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="jobExperience">Nível de Experiência *</label>
+                            <select id="jobExperience" name="experience" required>
+                                <option value="">Selecione o nível</option>
+                                <option value="estagiario">Estagiário</option>
+                                <option value="junior">Júnior</option>
+                                <option value="pleno">Pleno</option>
+                                <option value="senior">Sênior</option>
+                                <option value="especialista">Especialista</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salary and Benefits -->
+                <div class="form-section">
+                    <h3>Remuneração e Benefícios</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jobSalaryMin">Salário Mínimo</label>
+                            <input type="number" id="jobSalaryMin" name="salaryMin" placeholder="Ex: 5000" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="jobSalaryMax">Salário Máximo</label>
+                            <input type="number" id="jobSalaryMax" name="salaryMax" placeholder="Ex: 8000" min="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jobSalaryPeriod">Período de Pagamento</label>
+                        <select id="jobSalaryPeriod" name="salaryPeriod">
+                            <option value="">Selecione o período</option>
+                            <option value="mensal">Mensal</option>
+                            <option value="quinzenal">Quinzenal</option>
+                            <option value="semanal">Semanal</option>
+                            <option value="por-hora">Por Hora</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Benefícios Oferecidos</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="benefits" value="vale-refeicao">
+                                <span class="checkmark"></span>
+                                Vale Refeição
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="benefits" value="vale-transporte">
+                                <span class="checkmark"></span>
+                                Vale Transporte
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="benefits" value="plano-saude">
+                                <span class="checkmark"></span>
+                                Plano de Saúde
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="benefits" value="plano-dental">
+                                <span class="checkmark"></span>
+                                Plano Dental
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="benefits" value="seguro-vida">
+                                <span class="checkmark"></span>
+                                Seguro de Vida
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="benefits" value="gympass">
+                                <span class="checkmark"></span>
+                                Gympass
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="benefits" value="home-office">
+                                <span class="checkmark"></span>
+                                Home Office
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="benefits" value="flexibilidade">
+                                <span class="checkmark"></span>
+                                Flexibilidade de Horário
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="form-section">
+                    <h3>Informações Adicionais</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jobVacancies">Número de Vagas</label>
+                            <input type="number" id="jobVacancies" name="vacancies" placeholder="Ex: 2" min="1" value="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="jobUrgency">Urgência</label>
+                            <select id="jobUrgency" name="urgency">
+                                <option value="baixa">Baixa</option>
+                                <option value="media" selected>Média</option>
+                                <option value="alta">Alta</option>
+                                <option value="critica">Crítica</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jobSkills">Habilidades Necessárias</label>
+                        <input type="text" id="jobSkills" name="skills" placeholder="Ex: React, Node.js, TypeScript (separadas por vírgula)">
+                        <small>Separe as habilidades por vírgula</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jobAdditionalInfo">Informações Adicionais</label>
+                        <textarea id="jobAdditionalInfo" name="additionalInfo" placeholder="Qualquer informação adicional sobre a vaga..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Publication Settings -->
+                <div class="form-section">
+                    <h3>Configurações de Publicação</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jobStartDate">Data de Início</label>
+                            <input type="date" id="jobStartDate" name="startDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="jobEndDate">Data de Encerramento</label>
+                            <input type="date" id="jobEndDate" name="endDate">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="isActive" checked>
+                            <span class="checkmark"></span>
+                            Publicar vaga imediatamente
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="allowRemote">
+                            <span class="checkmark"></span>
+                            Permitir candidatos de outras cidades
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="saveDraft()">
+                        <i class="fas fa-save"></i> Salvar Rascunho
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Publicar Vaga
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/job-form.js"></script>
+</body>
+</html>

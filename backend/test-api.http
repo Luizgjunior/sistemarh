@@ -1,0 +1,80 @@
+### Arquivo para testar as APIs do backend
+### Use com extensão REST Client do VS Code
+
+### Health Check
+GET http://localhost:3000/api/health
+
+### Registrar usuário candidato
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "João Silva",
+  "email": "joao@email.com",
+  "password": "123456",
+  "userType": "candidato",
+  "candidateInfo": {
+    "phone": "(11) 99999-9999"
+  }
+}
+
+### Registrar usuário empresa
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "TechCorp Ltda",
+  "email": "contato@techcorp.com",
+  "password": "123456",
+  "userType": "empresa",
+  "companyInfo": {
+    "cnpj": "12.345.678/0001-90",
+    "description": "Empresa de tecnologia",
+    "sector": "Tecnologia"
+  }
+}
+
+### Login candidato
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "joao@email.com",
+  "password": "123456",
+  "userType": "candidato"
+}
+
+### Login empresa
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "contato@techcorp.com",
+  "password": "123456",
+  "userType": "empresa"
+}
+
+### Listar vagas (público)
+GET http://localhost:3000/api/jobs
+
+### Criar vaga (precisa do token da empresa)
+POST http://localhost:3000/api/jobs
+Content-Type: application/json
+Authorization: Bearer SEU_TOKEN_AQUI
+
+{
+  "title": "Desenvolvedor Frontend",
+  "description": "Vaga para desenvolvedor frontend com experiência em React. Trabalhar em projetos inovadores com tecnologias modernas.",
+  "requirements": "Experiência com React, TypeScript, HTML, CSS. Conhecimento em Git e metodologias ágeis é desejável.",
+  "location": "São Paulo, SP",
+  "workMode": "hibrido",
+  "contractType": "clt",
+  "experience": "pleno",
+  "category": "tecnologia",
+  "salary": {
+    "min": 8000,
+    "max": 12000
+  },
+  "benefits": ["Vale Refeição", "Plano de Saúde", "Home Office"],
+  "skills": ["React", "TypeScript", "JavaScript"]
+}

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte - RH Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-users"></i>
+                    <span>RH Pro</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                    <a href="index.html" class="nav-link">Início</a>
+                    <a href="pages/vagas-publicas.html" class="nav-link">Vagas</a>
+                    <a href="login.html" class="nav-link">Entrar</a>
+                    <a href="suporte.html" class="nav-link active">Suporte</a>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>Central de Suporte</h1>
+                    <p>Estamos aqui para ajudar você a encontrar respostas e resolver problemas</p>
+                </div>
+            </div>
+
+            <!-- Support Options -->
+            <div class="support-options">
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>FAQ</h3>
+                    <p>Encontre respostas para as perguntas mais frequentes</p>
+                    <a href="#faq" class="btn btn-primary">Ver FAQ</a>
+                </div>
+
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>E-mail</h3>
+                    <p>Envie sua dúvida por e-mail e receba uma resposta em até 24h</p>
+                    <a href="mailto:suporte@rhpro.com" class="btn btn-primary">Enviar E-mail</a>
+                </div>
+
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>Converse conosco pelo WhatsApp para suporte rápido</p>
+                    <a href="https://wa.me/5511999999999" class="btn btn-primary">Conversar</a>
+                </div>
+
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Chat Online</h3>
+                    <p>Inicie uma conversa em tempo real com nossa equipe</p>
+                    <button class="btn btn-primary" onclick="openChat()">Iniciar Chat</button>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <section id="faq" class="faq-section">
+                <h2>Perguntas Frequentes</h2>
+                
+                <div class="faq-categories">
+                    <button class="faq-category active" data-category="geral">Geral</button>
+                    <button class="faq-category" data-category="empresa">Para Empresas</button>
+                    <button class="faq-category" data-category="candidato">Para Candidatos</button>
+                    <button class="faq-category" data-category="tecnico">Técnico</button>
+                </div>
+
+                <div class="faq-content">
+                    <!-- FAQ Geral -->
+                    <div class="faq-category-content active" id="faq-geral">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>O que é o RH Pro?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>O RH Pro é uma plataforma completa de gestão de recursos humanos que conecta empresas e candidatos, facilitando o processo de recrutamento e seleção. Oferecemos ferramentas para criação de vagas, gestão de candidatos, análise de perfis e muito mais.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Como posso me cadastrar na plataforma?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Para se cadastrar, clique no botão "Entrar" no menu superior e selecione "Cadastro". Escolha o tipo de conta (Empresa ou Candidato), preencha os dados solicitados e confirme seu e-mail. O processo é rápido e gratuito.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>A plataforma é gratuita?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Sim! O RH Pro oferece um plano gratuito com funcionalidades básicas para empresas e candidatos. Para empresas que precisam de recursos avançados, oferecemos planos premium com funcionalidades adicionais.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Como funciona a segurança dos dados?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Levamos a segurança muito a sério. Todos os dados são criptografados e armazenados em servidores seguros. Seguimos as melhores práticas de segurança e estamos em conformidade com a LGPD (Lei Geral de Proteção de Dados).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Para Empresas -->
+                    <div class="faq-category-content" id="faq-empresa">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Como posso criar uma vaga?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Após fazer login como empresa, acesse o dashboard e clique em "Nova Vaga". Preencha todas as informações solicitadas, incluindo título, descrição, requisitos, localização e benefícios. Após revisar, publique a vaga.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Como gerencio os candidatos que se candidataram?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>No dashboard da empresa, acesse a seção "Candidatos" para ver todos os candidatos que se candidataram às suas vagas. Você pode visualizar currículos, alterar status, agendar entrevistas e gerenciar todo o processo seletivo.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Posso editar uma vaga após publicá-la?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Sim! Você pode editar qualquer vaga a qualquer momento. Acesse a seção "Minhas Vagas" no dashboard, clique na vaga desejada e selecione "Editar". As alterações serão aplicadas imediatamente.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Como posso pausar ou encerrar uma vaga?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Na seção "Minhas Vagas", você encontrará opções para pausar, reativar ou encerrar vagas. Vagas pausadas não aparecem para novos candidatos, mas você pode reativá-las a qualquer momento.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Para Candidatos -->
+                    <div class="faq-category-content" id="faq-candidato">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Como posso me candidatar a uma vaga?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Navegue pela lista de vagas, clique na vaga de seu interesse e depois em "Candidatar-se". Certifique-se de que seu perfil está completo e atualizado antes de se candidatar.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Como atualizo meu perfil?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Acesse seu dashboard de candidato e clique em "Meu Perfil". Lá você pode atualizar suas informações pessoais, experiência profissional, formação acadêmica e fazer upload do seu currículo.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Como acompanho o status das minhas candidaturas?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>No seu dashboard, acesse a seção "Minhas Candidaturas" para ver o status de todas as suas aplicações. Você receberá notificações por e-mail quando houver atualizações.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Posso salvar vagas para me candidatar depois?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Sim! Você pode salvar vagas clicando no ícone de coração. As vagas salvas ficam disponíveis na seção "Vagas Salvas" do seu dashboard para consulta posterior.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Técnico -->
+                    <div class="faq-category-content" id="faq-tecnico">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Quais navegadores são suportados?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>O RH Pro funciona em todos os navegadores modernos, incluindo Chrome, Firefox, Safari, Edge e Opera. Recomendamos sempre usar a versão mais recente do seu navegador para melhor experiência.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>A plataforma funciona em dispositivos móveis?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Sim! O RH Pro é totalmente responsivo e funciona perfeitamente em smartphones e tablets. Você pode acessar todas as funcionalidades de qualquer dispositivo.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Esqueci minha senha. Como recuperar?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Na página de login, clique em "Esqueceu a senha?" e informe seu e-mail. Você receberá um link para redefinir sua senha. Verifique também sua caixa de spam.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Como faço para excluir minha conta?</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Acesse as configurações da sua conta e procure pela opção "Excluir Conta". Esta ação é irreversível e todos os seus dados serão removidos permanentemente.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="contact-section">
+                <h2>Entre em Contato</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>E-mail</h4>
+                            <p>suporte@rhpro.com</p>
+                            <small>Resposta em até 24 horas</small>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>WhatsApp</h4>
+                            <p>(11) 99999-9999</p>
+                            <small>Segunda a Sexta, 9h às 18h</small>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telefone</h4>
+                            <p>(11) 3333-4444</p>
+                            <small>Segunda a Sexta, 9h às 18h</small>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Endereço</h4>
+                            <p>Av. Paulista, 1000<br>São Paulo - SP, 01310-100</p>
+                            <small>Atendimento presencial com agendamento</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chat Widget -->
+            <div id="chatWidget" class="chat-widget">
+                <div class="chat-header">
+                    <h4>Suporte Online</h4>
+                    <button class="chat-close" onclick="closeChat()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="chat-body">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="chat-message bot">
+                            <div class="message-content">
+                                <p>Olá! Como posso ajudá-lo hoje?</p>
+                            </div>
+                            <div class="message-time">Agora</div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Digite sua mensagem...">
+                        <button onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Toggle Button -->
+            <button id="chatToggle" class="chat-toggle" onclick="toggleChat()">
+                <i class="fas fa-comments"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-users"></i>
+                        <span>RH Pro</span>
+                    </div>
+                    <p>Conectando talentos com oportunidades desde 2024.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="pages/vagas-publicas.html">Vagas</a></li>
+                        <li><a href="suporte.html">Suporte</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contato@rhpro.com</li>
+                        <li><i class="fas fa-phone"></i> (11) 99999-9999</li>
+                        <li><i class="fas fa-map-marker-alt"></i> São Paulo, SP</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 RH Pro. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/support.js"></script>
+</body>
+</html>

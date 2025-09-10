@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Empresa - RH Pro</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-nav">
+            <div class="dashboard-logo">
+                <i class="fas fa-users"></i>
+                <span>RH Pro - Empresa</span>
+            </div>
+            <div class="dashboard-menu">
+                <a href="dashboard-empresa.html" class="active">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="vagas-empresa.html">
+                    <i class="fas fa-briefcase"></i> Vagas
+                </a>
+                <a href="candidatos-empresa.html">
+                    <i class="fas fa-user-tie"></i> Candidatos
+                </a>
+                <a href="criar-vaga.html">
+                    <i class="fas fa-plus"></i> Nova Vaga
+                </a>
+                <a href="configuracoes-empresa.html">
+                    <i class="fas fa-cog"></i> Configurações
+                </a>
+                <div class="user-menu">
+                    <div class="user-avatar" onclick="toggleUserMenu()">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="perfil-empresa.html">
+                            <i class="fas fa-user"></i> Perfil
+                        </a>
+                        <a href="configuracoes-empresa.html">
+                            <i class="fas fa-cog"></i> Configurações
+                        </a>
+                        <a href="#" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard">
+        <div class="dashboard-content">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h1>Bem-vindo de volta!</h1>
+                <p>Gerencie suas vagas e candidatos de forma eficiente</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Vagas Ativas</h3>
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="stat-number" id="totalJobs">0</div>
+                    <div class="stat-label">Total de vagas publicadas</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> +3 esta semana
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Candidatos</h3>
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="stat-number" id="totalCandidates">0</div>
+                    <div class="stat-label">Candidatos em processo</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> +12 esta semana
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Entrevistas</h3>
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-number" id="interviews">0</div>
+                    <div class="stat-label">Entrevistas agendadas</div>
+                    <div class="stat-change neutral">
+                        <i class="fas fa-minus"></i> Sem mudanças
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Contratados</h3>
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="stat-number" id="hired">0</div>
+                    <div class="stat-label">Pessoas contratadas</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> +2 este mês
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2>Ações Rápidas</h2>
+                <div class="actions-grid">
+                    <a href="criar-vaga.html" class="action-card">
+                        <i class="fas fa-plus-circle"></i>
+                        <h3>Criar Nova Vaga</h3>
+                        <p>Publique uma nova oportunidade</p>
+                    </a>
+                    <a href="candidatos-empresa.html" class="action-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Ver Candidatos</h3>
+                        <p>Gerencie candidaturas</p>
+                    </a>
+                    <a href="vagas-empresa.html" class="action-card">
+                        <i class="fas fa-list"></i>
+                        <h3>Minhas Vagas</h3>
+                        <p>Visualize todas as vagas</p>
+                    </a>
+                    <a href="relatorios-empresa.html" class="action-card">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Relatórios</h3>
+                        <p>Analise o desempenho</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="recent-activity">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>Atividade Recente</h3>
+                        <a href="candidatos-empresa.html" class="btn btn-secondary btn-sm">Ver Todas</a>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Candidato</th>
+                                <th>Vaga</th>
+                                <th>Status</th>
+                                <th>Data</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="candidate-info">
+                                        <div class="candidate-avatar">JD</div>
+                                        <div>
+                                            <div class="candidate-name">João Silva</div>
+                                            <div class="candidate-email">joao@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Desenvolvedor Frontend</td>
+                                <td><span class="status-badge status-review">Em Análise</span></td>
+                                <td>Hoje, 14:30</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Ver Currículo</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="candidate-info">
+                                        <div class="candidate-avatar">MS</div>
+                                        <div>
+                                            <div class="candidate-name">Maria Santos</div>
+                                            <div class="candidate-email">maria@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Designer UX/UI</td>
+                                <td><span class="status-badge status-interview">Entrevista</span></td>
+                                <td>Ontem, 16:45</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Ver Currículo</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="candidate-info">
+                                        <div class="candidate-avatar">PC</div>
+                                        <div>
+                                            <div class="candidate-name">Pedro Costa</div>
+                                            <div class="candidate-email">pedro@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Analista de Dados</td>
+                                <td><span class="status-badge status-approved">Aprovado</span></td>
+                                <td>2 dias atrás</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success">Contratar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Recent Jobs -->
+            <div class="recent-jobs">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>Vagas Recentes</h3>
+                        <a href="vagas-empresa.html" class="btn btn-secondary btn-sm">Ver Todas</a>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Candidatos</th>
+                                <th>Status</th>
+                                <th>Data</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="job-info">
+                                        <div class="job-title">Desenvolvedor Frontend</div>
+                                        <div class="job-location">São Paulo, SP - Remoto</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="candidate-count">8 candidatos</span>
+                                </td>
+                                <td><span class="status-badge status-new">Ativa</span></td>
+                                <td>Hoje</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-primary">Editar</button>
+                                        <button class="btn btn-sm btn-secondary">Pausar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="job-info">
+                                        <div class="job-title">Designer UX/UI</div>
+                                        <div class="job-location">Rio de Janeiro, RJ</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="candidate-count">15 candidatos</span>
+                                </td>
+                                <td><span class="status-badge status-review">Em Pausa</span></td>
+                                <td>Ontem</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-primary">Editar</button>
+                                        <button class="btn btn-sm btn-success">Ativar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="job-info">
+                                        <div class="job-title">Analista de Dados</div>
+                                        <div class="job-location">Belo Horizonte, MG</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="candidate-count">3 candidatos</span>
+                                </td>
+                                <td><span class="status-badge status-approved">Fechada</span></td>
+                                <td>3 dias atrás</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-secondary">Reabrir</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

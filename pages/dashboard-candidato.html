@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Candidato - RH Pro</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-nav">
+            <div class="dashboard-logo">
+                <i class="fas fa-users"></i>
+                <span>RH Pro - Candidato</span>
+            </div>
+            <div class="dashboard-menu">
+                <a href="dashboard-candidato.html" class="active">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="vagas-publicas.html">
+                    <i class="fas fa-search"></i> Buscar Vagas
+                </a>
+                <a href="minhas-candidaturas.html">
+                    <i class="fas fa-file-alt"></i> Minhas Candidaturas
+                </a>
+                <a href="perfil-candidato.html">
+                    <i class="fas fa-user"></i> Meu Perfil
+                </a>
+                <a href="configuracoes-candidato.html">
+                    <i class="fas fa-cog"></i> Configurações
+                </a>
+                <div class="user-menu">
+                    <div class="user-avatar" onclick="toggleUserMenu()">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="perfil-candidato.html">
+                            <i class="fas fa-user"></i> Perfil
+                        </a>
+                        <a href="configuracoes-candidato.html">
+                            <i class="fas fa-cog"></i> Configurações
+                        </a>
+                        <a href="#" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard">
+        <div class="dashboard-content">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h1>Olá, João!</h1>
+                <p>Encontre a oportunidade perfeita para sua carreira</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Candidaturas</h3>
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-number" id="totalApplications">0</div>
+                    <div class="stat-label">Total de candidaturas</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> +2 esta semana
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Em Análise</h3>
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-number" id="pendingApplications">0</div>
+                    <div class="stat-label">Aguardando resposta</div>
+                    <div class="stat-change neutral">
+                        <i class="fas fa-minus"></i> Sem mudanças
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Entrevistas</h3>
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-number" id="interviews">0</div>
+                    <div class="stat-label">Entrevistas agendadas</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> +1 esta semana
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Ofertas</h3>
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="stat-number" id="offers">0</div>
+                    <div class="stat-label">Ofertas recebidas</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> +1 este mês
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2>Ações Rápidas</h2>
+                <div class="actions-grid">
+                    <a href="vagas-publicas.html" class="action-card">
+                        <i class="fas fa-search"></i>
+                        <h3>Buscar Vagas</h3>
+                        <p>Encontre oportunidades</p>
+                    </a>
+                    <a href="perfil-candidato.html" class="action-card">
+                        <i class="fas fa-user-edit"></i>
+                        <h3>Atualizar Perfil</h3>
+                        <p>Mantenha seu perfil atualizado</p>
+                    </a>
+                    <a href="minhas-candidaturas.html" class="action-card">
+                        <i class="fas fa-list"></i>
+                        <h3>Minhas Candidaturas</h3>
+                        <p>Acompanhe suas aplicações</p>
+                    </a>
+                    <a href="curriculo.html" class="action-card">
+                        <i class="fas fa-file-upload"></i>
+                        <h3>Upload Currículo</h3>
+                        <p>Envie seu currículo</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Recent Applications -->
+            <div class="recent-applications">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>Candidaturas Recentes</h3>
+                        <a href="minhas-candidaturas.html" class="btn btn-secondary btn-sm">Ver Todas</a>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Vaga</th>
+                                <th>Empresa</th>
+                                <th>Status</th>
+                                <th>Data</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="job-info">
+                                        <div class="job-title">Desenvolvedor Frontend</div>
+                                        <div class="job-location">São Paulo, SP - Remoto</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="company-info">
+                                        <div class="company-name">TechCorp</div>
+                                        <div class="company-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <span>4.8</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-review">Em Análise</span></td>
+                                <td>Hoje</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Ver Detalhes</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="job-info">
+                                        <div class="job-title">Designer UX/UI</div>
+                                        <div class="job-location">Rio de Janeiro, RJ</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="company-info">
+                                        <div class="company-name">DesignStudio</div>
+                                        <div class="company-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <span>4.2</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-interview">Entrevista</span></td>
+                                <td>Ontem</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Ver Detalhes</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="job-info">
+                                        <div class="job-title">Analista de Dados</div>
+                                        <div class="job-location">Belo Horizonte, MG</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="company-info">
+                                        <div class="company-name">DataTech</div>
+                                        <div class="company-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <span>4.9</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-approved">Aprovado</span></td>
+                                <td>3 dias atrás</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success">Aceitar Oferta</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Recommended Jobs -->
+            <div class="recommended-jobs">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>Vagas Recomendadas</h3>
+                        <a href="vagas-publicas.html" class="btn btn-secondary btn-sm">Ver Todas</a>
+                    </div>
+                    <div class="jobs-grid">
+                        <div class="job-card">
+                            <div class="job-header">
+                                <h4>Desenvolvedor Full Stack</h4>
+                                <span class="job-type">CLT</span>
+                            </div>
+                            <div class="job-company">StartupTech</div>
+                            <div class="job-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                São Paulo, SP - Híbrido
+                            </div>
+                            <div class="job-salary">R$ 8.000 - R$ 12.000</div>
+                            <div class="job-skills">
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">TypeScript</span>
+                            </div>
+                            <div class="job-actions">
+                                <button class="btn btn-primary btn-sm">Candidatar-se</button>
+                                <button class="btn btn-secondary btn-sm">Salvar</button>
+                            </div>
+                        </div>
+
+                        <div class="job-card">
+                            <div class="job-header">
+                                <h4>Product Manager</h4>
+                                <span class="job-type">PJ</span>
+                            </div>
+                            <div class="job-company">InnovateCorp</div>
+                            <div class="job-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Remoto
+                            </div>
+                            <div class="job-salary">R$ 15.000 - R$ 20.000</div>
+                            <div class="job-skills">
+                                <span class="skill-tag">Product Management</span>
+                                <span class="skill-tag">Agile</span>
+                                <span class="skill-tag">Analytics</span>
+                            </div>
+                            <div class="job-actions">
+                                <button class="btn btn-primary btn-sm">Candidatar-se</button>
+                                <button class="btn btn-secondary btn-sm">Salvar</button>
+                            </div>
+                        </div>
+
+                        <div class="job-card">
+                            <div class="job-header">
+                                <h4>DevOps Engineer</h4>
+                                <span class="job-type">CLT</span>
+                            </div>
+                            <div class="job-company">CloudTech</div>
+                            <div class="job-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                São Paulo, SP
+                            </div>
+                            <div class="job-salary">R$ 10.000 - R$ 15.000</div>
+                            <div class="job-skills">
+                                <span class="skill-tag">AWS</span>
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">Kubernetes</span>
+                            </div>
+                            <div class="job-actions">
+                                <button class="btn btn-primary btn-sm">Candidatar-se</button>
+                                <button class="btn btn-secondary btn-sm">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

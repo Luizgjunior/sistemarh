@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Integração - RH Pro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .test-section h3 {
+            color: #2563eb;
+            margin: 0 0 1rem 0;
+        }
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+        .btn:hover {
+            background: #1d4ed8;
+        }
+        .result {
+            background: #f3f4f6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            border-left: 4px solid #2563eb;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .success {
+            border-left-color: #10b981;
+            background: #ecfdf5;
+        }
+        .error {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste de Integração Frontend ↔ Backend</h1>
+    <p>Esta página testa a conexão entre o frontend e as APIs do backend.</p>
+
+    <div class="test-section">
+        <h3>1. Teste de Conectividade</h3>
+        <button class="btn" onclick="testHealth()">🔍 Testar Health Check</button>
+        <div id="healthResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>2. Teste de Autenticação</h3>
+        <button class="btn" onclick="testAdminLogin()">🔐 Login Admin</button>
+        <button class="btn" onclick="testRegister()">👤 Registrar Usuário</button>
+        <button class="btn" onclick="testLogout()">🚪 Logout</button>
+        <div id="authResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>3. Teste de Vagas</h3>
+        <button class="btn" onclick="testCreateJob()">💼 Criar Vaga</button>
+        <button class="btn" onclick="testListJobs()">📋 Listar Vagas</button>
+        <div id="jobsResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>4. Teste de Candidaturas</h3>
+        <button class="btn" onclick="testApplyToJob()">📝 Candidatar-se</button>
+        <button class="btn" onclick="testMyApplications()">📄 Minhas Candidaturas</button>
+        <div id="applicationsResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>5. Status da API</h3>
+        <div id="apiStatus">
+            <p><strong>URL da API:</strong> <span id="apiUrl"></span></p>
+            <p><strong>Token:</strong> <span id="tokenStatus"></span></p>
+            <p><strong>Usuário:</strong> <span id="userStatus"></span></p>
+        </div>
+    </div>
+
+    <!-- Include necessary scripts -->
+    <script src="js/config.js"></script>
+
+    <script>
+        // Update status display
+        function updateStatus() {
+            document.getElementById('apiUrl').textContent = API_CONFIG.BASE_URL;
+            document.getElementById('tokenStatus').textContent = api.getToken() ? '✅ Presente' : '❌ Ausente';
+            const user = api.getUser();
+            document.getElementById('userStatus').textContent = user ? `✅ ${user.name} (${user.userType})` : '❌ Não logado';
+        }
+
+        // Test health check
+        async function testHealth() {
+            const resultDiv = document.getElementById('healthResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = '⏳ Testando conexão...';
+
+            try {
+                const response = await api.healthCheck();
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `✅ Sucesso!\n\nResposta:\n${JSON.stringify(response, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erro: ${error.message}`;
+            }
+        }
+
+        // Test admin login
+        async function testAdminLogin() {
+            const resultDiv = document.getElementById('authResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = '⏳ Fazendo login como admin...';
+
+            try {
+                const response = await api.login({
+                    email: 'admin@rhpro.com',
+                    password: 'admin123',
+                    userType: 'admin'
+                });
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `✅ Login realizado!\n\nResposta:\n${JSON.stringify(response, null, 2)}`;
+                updateStatus();
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erro: ${error.message}`;
+            }
+        }
+
+        // Test register
+        async function testRegister() {
+            const resultDiv = document.getElementById('authResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = '⏳ Registrando novo usuário...';
+
+            try {
+                const response = await api.register({
+                    name: 'Teste Usuário',
+                    email: `teste.${Date.now()}@email.com`,
+                    password: '123456',
+                    userType: 'candidato'
+                });
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `✅ Usuário registrado!\n\nResposta:\n${JSON.stringify(response, null, 2)}`;
+                updateStatus();
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erro: ${error.message}`;
+            }
+        }
+
+        // Test logout
+        function testLogout() {
+            const resultDiv = document.getElementById('authResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = '⏳ Fazendo logout...';
+
+            try {
+                api.clearToken();
+                api.clearUser();
+                resultDiv.className = 'result success';
+                resultDiv.textContent = '✅ Logout realizado com sucesso!';
+                updateStatus();
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erro: ${error.message}`;
+            }
+        }
+
+        // Test create job
+        async function testCreateJob() {
+            const resultDiv = document.getElementById('jobsResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = '⏳ Criando vaga de teste...';
+
+            try {
+                // First ensure we have a company token
+                await api.login({
+                    email: 'admin@rhpro.com',
+                    password: 'admin123',
+                    userType: 'admin'
+                });
+
+                const response = await api.createJob({
+                    title: 'Desenvolvedor Frontend - Teste',
+                    description: 'Vaga de teste criada via API',
+                    requirements: 'React, JavaScript, HTML, CSS',
+                    location: 'São Paulo, SP',
+                    workMode: 'remoto',
+                    contractType: 'clt',
+                    experience: 'pleno',
+                    category: 'tecnologia',
+                    salaryMin: 8000,
+                    salaryMax: 12000,
+                    benefits: ['Vale Refeição', 'Plano de Saúde'],
+                    skills: ['React', 'JavaScript']
+                });
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `✅ Vaga criada!\n\nResposta:\n${JSON.stringify(response, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erro: ${error.message}`;
+            }
+        }
+
+        // Test list jobs
+        async function testListJobs() {
+            const resultDiv = document.getElementById('jobsResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = '⏳ Carregando vagas...';
+
+            try {
+                const response = await api.getJobs(1, 5);
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `✅ Vagas carregadas!\n\nTotal: ${response.total || 0}\nVagas: ${response.jobs?.length || 0}\n\nResposta:\n${JSON.stringify(response, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erro: ${error.message}`;
+            }
+        }
+
+        // Test apply to job
+        async function testApplyToJob() {
+            const resultDiv = document.getElementById('applicationsResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = '⏳ Testando candidatura...';
+
+            try {
+                // Ensure we have a candidate token
+                await api.register({
+                    name: 'Candidato Teste',
+                    email: `candidato.${Date.now()}@email.com`,
+                    password: '123456',
+                    userType: 'candidato'
+                });
+
+                const response = await api.applyToJob({
+                    jobId: 1,
+                    cover_letter: 'Carta de apresentação de teste'
+                });
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `✅ Candidatura realizada!\n\nResposta:\n${JSON.stringify(response, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erro: ${error.message}`;
+            }
+        }
+
+        // Test my applications
+        async function testMyApplications() {
+            const resultDiv = document.getElementById('applicationsResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = '⏳ Carregando candidaturas...';
+
+            try {
+                const response = await api.getMyApplications();
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `✅ Candidaturas carregadas!\n\nResposta:\n${JSON.stringify(response, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erro: ${error.message}`;
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStatus();
+            
+            // Update status every 5 seconds
+            setInterval(updateStatus, 5000);
+        });
+    </script>
+</body>
+</html>

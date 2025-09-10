@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vagas Disponíveis - RH Pro</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-nav">
+            <div class="dashboard-logo">
+                <i class="fas fa-users"></i>
+                <span>RH Pro</span>
+            </div>
+            <div class="dashboard-menu">
+                <a href="../index.html">
+                    <i class="fas fa-home"></i> Início
+                </a>
+                <a href="vagas-publicas.html" class="active">
+                    <i class="fas fa-search"></i> Buscar Vagas
+                </a>
+                <a href="login.html">
+                    <i class="fas fa-sign-in-alt"></i> Entrar
+                </a>
+                <div class="user-menu">
+                    <div class="user-avatar" onclick="toggleUserMenu()">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="login.html">
+                            <i class="fas fa-sign-in-alt"></i> Entrar
+                        </a>
+                        <a href="login.html">
+                            <i class="fas fa-user-plus"></i> Cadastrar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard">
+        <div class="dashboard-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>Vagas Disponíveis</h1>
+                    <p>Encontre a oportunidade perfeita para sua carreira</p>
+                </div>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="search-filters">
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Buscar por cargo, empresa ou palavra-chave...">
+                        <button class="search-btn" onclick="searchJobs()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="locationFilter">Localização</label>
+                        <select id="locationFilter" onchange="applyFilters()">
+                            <option value="">Todas as localizações</option>
+                            <option value="sao-paulo">São Paulo, SP</option>
+                            <option value="rio-de-janeiro">Rio de Janeiro, RJ</option>
+                            <option value="belo-horizonte">Belo Horizonte, MG</option>
+                            <option value="brasilia">Brasília, DF</option>
+                            <option value="salvador">Salvador, BA</option>
+                            <option value="remoto">Remoto</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="contractFilter">Tipo de Contrato</label>
+                        <select id="contractFilter" onchange="applyFilters()">
+                            <option value="">Todos os tipos</option>
+                            <option value="clt">CLT</option>
+                            <option value="pj">PJ</option>
+                            <option value="estagio">Estágio</option>
+                            <option value="freelancer">Freelancer</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="experienceFilter">Experiência</label>
+                        <select id="experienceFilter" onchange="applyFilters()">
+                            <option value="">Todos os níveis</option>
+                            <option value="estagiario">Estagiário</option>
+                            <option value="junior">Júnior</option>
+                            <option value="pleno">Pleno</option>
+                            <option value="senior">Sênior</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="workModeFilter">Modalidade</label>
+                        <select id="workModeFilter" onchange="applyFilters()">
+                            <option value="">Todas as modalidades</option>
+                            <option value="presencial">Presencial</option>
+                            <option value="remoto">Remoto</option>
+                            <option value="hibrido">Híbrido</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-secondary" onclick="clearFilters()">
+                        <i class="fas fa-times"></i> Limpar Filtros
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Info -->
+            <div class="results-info">
+                <div class="results-count">
+                    <span id="resultsCount">0</span> vagas encontradas
+                </div>
+                <div class="sort-options">
+                    <label for="sortSelect">Ordenar por:</label>
+                    <select id="sortSelect" onchange="sortJobs()">
+                        <option value="recent">Mais recentes</option>
+                        <option value="salary-high">Maior salário</option>
+                        <option value="salary-low">Menor salário</option>
+                        <option value="company">Nome da empresa</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Jobs List -->
+            <div class="jobs-list" id="jobsList">
+                <!-- Job cards will be dynamically loaded here -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be dynamically generated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Job Details Modal -->
+    <div id="jobModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalJobTitle">Título da Vaga</h2>
+                <button class="modal-close" onclick="closeJobModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalJobContent">
+                <!-- Job details will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeJobModal()">Fechar</button>
+                <button class="btn btn-primary" onclick="applyToJob()">Candidatar-se</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/jobs-list.js"></script>
+</body>
+</html>
