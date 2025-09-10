@@ -1,78 +1,101 @@
-// API Handler para Vercel
+// Handler da API para Vercel
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
 const path = require('path');
-
-// Configurar variáveis de ambiente
-process.env.NODE_ENV = 'production';
-process.env.JWT_SECRET = process.env.JWT_SECRET || 'seu_jwt_secret_super_seguro_aqui_12345';
-process.env.JWT_EXPIRE = process.env.JWT_EXPIRE || '7d';
-
-// Importar configuração do banco
-const { initializeDB } = require('../backend/config/database');
-
-// Importar rotas
-const authRoutes = require('../backend/routes/auth');
-const userRoutes = require('../backend/routes/users');
-const jobRoutes = require('../backend/routes/jobs');
-const applicationRoutes = require('../backend/routes/applications');
-
-// Importar middleware
-const { errorHandler } = require('../backend/middleware/errorHandler');
 
 const app = express();
 
-// Inicializar banco de dados
-initializeDB().catch(console.error);
+// Configurar variáveis de ambiente para produção
+process.env.NODE_ENV = 'production';
+process.env.JWT_SECRET = process.env.JWT_SECRET || 'rhpro_jwt_secret_production_2024';
+process.env.JWT_EXPIRE = process.env.JWT_EXPIRE || '24h';
 
-// Middleware de segurança
-app.use(helmet());
-
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 100, // máximo 100 requests por IP
-  message: 'Muitas tentativas. Tente novamente em 15 minutos.'
-});
-app.use('/api', limiter);
-
-// CORS
-app.use(cors({
-  origin: true, // Aceitar qualquer origem em produção
-  credentials: true
+// Middleware básico
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false
 }));
 
-// Body parser
+app.use(cors({
+  origin: true,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// Rotas da API
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/jobs', jobRoutes);
-app.use('/api/applications', applicationRoutes);
+// Importar e inicializar banco de dados
+try {
+  const { initDatabase } = require('../backend/config/database');
+  initDatabase().catch(error => {
+    console.error('Erro ao inicializar banco:', error);
+  });
+} catch (error) {
+  console.error('Erro ao importar database:', error);
+}
 
-// Rota de teste
+// Rota de health check simples
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'OK',
-    message: 'Servidor RH Pro funcionando!',
+    message: 'API RH Pro funcionando na Vercel!',
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV,
+    environment: 'production',
     database: 'SQLite'
   });
 });
 
-// Middleware de tratamento de erros
-app.use(errorHandler);
+// Importar rotas com tratamento de erro
+try {
+  const authRoutes = require('../backend/routes/auth');
+  const userRoutes = require('../backend/routes/users');
+  const jobRoutes = require('../backend/routes/jobs');
+  const applicationRoutes = require('../backend/routes/applications');
 
-// Rota 404
+  // Aplicar rotas
+  app.use('/api/auth', authRoutes);
+  app.use('/api/users', userRoutes);
+  app.use('/api/jobs', jobRoutes);
+  app.use('/api/applications', applicationRoutes);
+} catch (error) {
+  console.error('Erro ao importar rotas:', error);
+  
+  // Fallback routes em caso de erro
+  app.use('/api/*', (req, res) => {
+    res.status(500).json({
+      success: false,
+      message: 'Erro interno do servidor',
+      error: error.message
+    });
+  });
+}
+
+// Middleware de erro global
+app.use((error, req, res, next) => {
+  console.error('Erro não tratado:', error);
+  res.status(500).json({
+    success: false,
+    message: 'Erro interno do servidor',
+    ...(process.env.NODE_ENV === 'development' && { error: error.message })
+  });
+});
+
+// Rota 404 para APIs
+app.use('/api/*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Rota não encontrada: ${req.path}`
+  });
+});
+
+// Rota catch-all
 app.use('*', (req, res) => {
   res.status(404).json({
     success: false,
-    message: 'Rota não encontrada'
+    message: 'Endpoint não encontrado'
   });
 });
 
