@@ -3,13 +3,9 @@
   "builds": [
     {
       "src": "backend/start.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
+      "use": "@vercel/node",
       "config": {
-        "distDir": "."
+        "maxLambdaSize": "50mb"
       }
     }
   ],
@@ -19,16 +15,15 @@
       "dest": "/backend/start.js"
     },
     {
+      "src": "/(.*\\.(css|js|html|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
+      "dest": "/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
   ],
   "env": {
     "NODE_ENV": "production"
-  },
-  "functions": {
-    "backend/start.js": {
-      "maxDuration": 30
-    }
   }
 }
